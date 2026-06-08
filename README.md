@@ -11,6 +11,18 @@
   <img src="https://img.shields.io/badge/🚀-MultiDispositivo-blue?style=for-the-badge">
 </p>
 
+---
+
+<div align="center">
+
+### 💬 Únete a la Comunidad de NanatsuBot-MD
+
+<a href="https://chat.whatsapp.com/BHpTc5WmS2XF27H8tgv9tg?s=cl&p=a&ilr=0" target="_blank">
+  <img src="https://img.shields.io/badge/💚_UNIRSE_AL_GRUPO-WhatsApp-25D366?style=for-the-badge">
+</a>
+
+</div>
+
 Nanatsu MD
 Bot de WhatsApp MultiDispositivo inspirado en Nanatsu no Taizai ⚔️ 
 ---
