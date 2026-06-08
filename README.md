@@ -1,1 +1,32 @@
-# NanatsuBot-MD
+# 👑 Nanatsu MD
+
+
+Nanatsu MD
+Bot de WhatsApp MultiDispositivo inspirado en Nanatsu no Taizai ⚔️ 
+---
+✨ Características
+🤖 Sistema MultiDispositivo (MD)
+👥 SubBots / Jadibot
+🎮 Juegos
+🎵 Descargas Multimedia
+🖼️ Generación de Imágenes
+🔍 Buscadores
+🎨 Stickers
+⚙️ Herramientas para Grupos
+👑 Comandos Exclusivos para Owner
+🚀 Rápido y Estable
+
+---
+
+🛠️ Requisitos
+Node.js 18 o superior
+Git
+Conexión a Internet estable
+
+---
+
+# ⚠️ Aviso
+Este proyecto fue desarrollado con fines educativos y de entretenimiento. El uso indebido del bot es responsabilidad exclusiva del usuario.
+---
+# 🌟 Nanatsu MD
+"El poder de los Siete Pecados Capitales en tu WhatsApp."
