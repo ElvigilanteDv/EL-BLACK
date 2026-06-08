@@ -2,7 +2,7 @@
 
 <div align="center">
   <img src="https://files.catbox.moe/5gult0.png" width="800"/>
-</div>
+</div> 
 
 <p align="center">
   <img src="https://img.shields.io/badge/👑-NanatsuBot--MD-gold?style=for-the-badge">
