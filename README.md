@@ -33,3 +33,9 @@ Este proyecto fue desarrollado con fines educativos y de entretenimiento. El uso
 ---
 # 🌟 Nanatsu MD
 "El poder de los Siete Pecados Capitales en tu WhatsApp."
+
+<p align="center">
+<img src="https://img.shields.io/badge/Version-1.0-blue">
+<img src="https://img.shields.io/badge/Node.js-18+-green">
+<img src="https://img.shields.io/badge/Status-Online-brightgreen">
+</p>
