@@ -35,7 +35,8 @@ Este proyecto fue desarrollado con fines educativos y de entretenimiento. El uso
 "El poder de los Siete Pecados Capitales en tu WhatsApp."
 
 <p align="center">
-<img src="https://img.shields.io/badge/Version-1.0-blue">
-<img src="https://img.shields.io/badge/Node.js-18+-green">
-<img src="https://img.shields.io/badge/Status-Online-brightgreen">
+  <img src="https://img.shields.io/badge/👑-NanatsuBot--MD-gold?style=for-the-badge">
+  <img src="https://img.shields.io/badge/⚔️-Los_7_Pecados_Capitales-red?style=for-the-badge">
+  <img src="https://img.shields.io/badge/🤖-WhatsApp_Bot-green?style=for-the-badge">
+  <img src="https://img.shields.io/badge/🚀-MultiDispositivo-blue?style=for-the-badge">
 </p>
