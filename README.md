@@ -4,6 +4,13 @@
   <img src="https://files.catbox.moe/5gult0.png" width="800"/>
 </div>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/👑-NanatsuBot--MD-gold?style=for-the-badge">
+  <img src="https://img.shields.io/badge/⚔️-Los_7_Pecados_Capitales-red?style=for-the-badge">
+  <img src="https://img.shields.io/badge/🤖-WhatsApp_Bot-green?style=for-the-badge">
+  <img src="https://img.shields.io/badge/🚀-MultiDispositivo-blue?style=for-the-badge">
+</p>
+
 Nanatsu MD
 Bot de WhatsApp MultiDispositivo inspirado en Nanatsu no Taizai ⚔️ 
 ---
@@ -34,9 +41,3 @@ Este proyecto fue desarrollado con fines educativos y de entretenimiento. El uso
 # 🌟 Nanatsu MD
 "El poder de los Siete Pecados Capitales en tu WhatsApp."
 
-<p align="center">
-  <img src="https://img.shields.io/badge/👑-NanatsuBot--MD-gold?style=for-the-badge">
-  <img src="https://img.shields.io/badge/⚔️-Los_7_Pecados_Capitales-red?style=for-the-badge">
-  <img src="https://img.shields.io/badge/🤖-WhatsApp_Bot-green?style=for-the-badge">
-  <img src="https://img.shields.io/badge/🚀-MultiDispositivo-blue?style=for-the-badge">
-</p>
