@@ -1,5 +1,8 @@
 # 👑 Nanatsu MD
 
+<div align="center">
+  <img src="https://files.catbox.moe/5gult0.png" width="800"/>
+</div>
 
 Nanatsu MD
 Bot de WhatsApp MultiDispositivo inspirado en Nanatsu no Taizai ⚔️ 
