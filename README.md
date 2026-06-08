@@ -1,7 +1,7 @@
 # 👑 Nanatsu MD
 
 <div align="center">
-  <img src="https://files.catbox.moe/yp1tti.png" width="320">
+  <img src="https://files.catbox.moe/5gult0.png" width="320">
 
 
 <p align="center">
