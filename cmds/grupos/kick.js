@@ -7,39 +7,37 @@ export default {
       client.sendMessage(jid, { text }, { quoted: m })
 
     try {
-      // Solo grupos
       if (!jid.endsWith('@g.us')) {
-        return reply('❌ Este comando solo funciona en grupos.')
+        return reply('❌ Solo funciona en grupos.')
       }
 
       const metadata = await client.groupMetadata(jid)
 
-      // 👇 MEJOR FORMA DE DETECTAR AL USUARIO
+      // 🔥 ESTE ES EL PUNTO CLAVE (más compatible)
       const sender =
-        m.sender ||
         m.key.participant ||
         m.participant ||
-        m.key.remoteJid
+        m.sender
 
-      // Buscar si es admin (FORMA MÁS SEGURA)
-      const isAdmin = metadata.participants.some(p =>
-        p.id === sender && (p.admin === 'admin' || p.admin === 'superadmin')
+      // Buscar info del usuario correctamente
+      const senderData = metadata.participants.find(p =>
+        p.id === sender
       )
 
-      if (!isAdmin) {
+      // ❗ DEBUG (IMPORTANTE: deja esto 1 vez para ver qué pasa)
+      console.log('SENDER =>', sender)
+      console.log('PARTICIPANTS =>', metadata.participants)
+
+      if (!senderData || (senderData.admin !== 'admin' && senderData.admin !== 'superadmin')) {
         return reply('🚫 Solo los administradores pueden usar este comando.')
       }
 
-      // Bot number
-      const botNumber =
-        client.user?.id?.split(':')[0] + '@s.whatsapp.net'
+      // Bot admin check
+      const botId = client.user.id.split(':')[0] + '@s.whatsapp.net'
+      const botData = metadata.participants.find(p => p.id === botId)
 
-      const botIsAdmin = metadata.participants.some(p =>
-        p.id === botNumber && (p.admin === 'admin' || p.admin === 'superadmin')
-      )
-
-      if (!botIsAdmin) {
-        return reply('⚠️ Necesito ser administrador para expulsar usuarios.')
+      if (!botData || !botData.admin) {
+        return reply('⚠️ Necesito ser administrador para expulsar.')
       }
 
       // Menciones
@@ -47,9 +45,7 @@ export default {
         m.message?.extendedTextMessage?.contextInfo?.mentionedJid || []
 
       if (!mentioned.length) {
-        return reply(
-          '⚔️ Uso correcto:\n.kick @usuario'
-        )
+        return reply('⚔️ Usa: .kick @usuario')
       }
 
       const expulsados = []
@@ -60,8 +56,7 @@ export default {
 
         if (!member) continue
 
-        // No expulsar admins ni bot
-        if (member.admin || user === botNumber) {
+        if (member.admin || user === botId) {
           protegidos.push(user)
           continue
         }
@@ -70,43 +65,17 @@ export default {
         expulsados.push(user)
       }
 
-      let text =
-        `╔══════════════════════╗\n` +
-        `   ✦ *NANATSU BOT - MD* ✦\n` +
-        `╚══════════════════════╝\n\n` +
-        `⚔️ *Sistema de Moderación*\n\n`
-
-      if (expulsados.length) {
-        text +=
-          `✅ *Expulsados:*\n` +
-          expulsados.map(u => `• @${u.split('@')[0]}`).join('\n') +
-          '\n\n'
-      }
-
-      if (protegidos.length) {
-        text +=
-          `🛡️ *Protegidos:*\n` +
-          protegidos.map(u => `• @${u.split('@')[0]}`).join('\n') +
-          '\n\n'
-      }
-
-      text += `❝ La justicia ha sido ejecutada. ❞`
-
-      await client.sendMessage(
-        jid,
-        {
-          text,
-          mentions: [...expulsados, ...protegidos]
-        },
-        { quoted: m }
-      )
+      await client.sendMessage(jid, {
+        text:
+          `⚔️ *KICK EJECUTADO*\n\n` +
+          `✅ Expulsados: ${expulsados.length}\n` +
+          `🛡️ Protegidos: ${protegidos.length}`,
+        mentions: [...expulsados, ...protegidos]
+      }, { quoted: m })
 
     } catch (err) {
       console.error(err)
-
-      await reply(
-        `❌ Error en kick:\n\`\`\`${err.message}\`\`\``
-      )
+      await reply(`❌ Error:\n${err.message}`)
     }
   }
 }
