@@ -95,8 +95,8 @@ export default {
       const botSettings = global.db.data.settings[botId] || {};
 
       const nombreBot = botSettings.namebot || 'NanatsuBot-MD';
-      const canalId = botSettings.id || '120363407253@newsletter';
-      const canalName = botSettings.nameid || '⚔️ NanatsuBot-MD — Los 7 Pecados';
+      const canalId = botSettings.id || '0029VbCv5KCAe5Vpc1nH6u1Y@newsletter';
+      const canalName = botSettings.nameid || '⚔️ AMILKARGIT  OFC — Los 7 Pecados';
 
       // Imagen del banner
       const imagePath = join(process.cwd(), 'lib', 'nanatsu.jpg');
