@@ -3,91 +3,107 @@ import { join } from 'path';
 import { xpRange } from '../../lib/levelling.js';
 
 const defaultMenu = `
-◤━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━◥
-│  🐉 𝙶𝙾𝚃𝙴𝙽𝙺𝚂 𝚅𝟷 𝙱𝙾𝚃 🌀   │
-├──────────────────────────────┤
-│ 𝐻𝑜𝑙𝑎~ 𝑠𝑜𝑦 %botname
-│ *%name*, %greeting
+╔══════════════════════════════╗
+║  ⚔️  𝗡𝗔𝗡𝗔𝗧𝗦𝗨 𝗕𝗢𝗧 - 𝗠𝗗  ⚔️  ║
+║   🔱 𝗟𝗢𝗦 𝟳 𝗣𝗘𝗖𝗔𝗗𝗢𝗦 🔱    ║
+╚══════════════════════════════╝
+
+┌─「 🐉 𝗜𝗡𝗙𝗢 𝗗𝗘𝗟 𝗣𝗘𝗖𝗔𝗗𝗢𝗥 」
+│ 👤 *Pecador:* %name
+│ %greeting
 │
-│ 🐉 𝑇𝑖𝑝𝑜: %tipo
-│ ⚡ 𝑁𝑖𝑣𝑒𝑙: %level
-│ 📅 %date
-│ 🕐 %time
-│ ⏱️ %uptime
-├──────────────────────────────┤
-│    🌀 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 🌀     │
-├──────────────────────────────┤
-│ ⚡ 𝙴𝙲𝙾𝙽𝙾𝙼𝚈
-│   🌀 %prefixdaily - Recompensa diaria
-│   🌀 %prefixweekly - Recompensa semanal
-│   🌀 %prefixmonthly - Recompensa mensual
-│   🌀 %prefixritual - Invocar ritual
-│   🌀 %prefixrt - Ruleta
-│   🌀 %prefixcrime - Robo
-│   🌀 %prefixslut - Prostituirse
-│   🌀 %prefixwork - Trabajar
-│   🌀 %prefixdungeon - Mazmorra
-│   🌀 %prefixmine - Minar
-│   🌀 %prefixfish - Pescar
-│   🌀 %prefixadventure - Aventura
-│   🌀 %prefixeinfo - Info economía
-│   🌀 %prefixbal - Ver balance
-│   🌀 %prefixbaltop - Ranking economy
-│   🌀 %prefixpay - Transferir coins
-│   🌀 %prefixdep - Depositar coins
-│   🌀 %prefixwithdraw - Retirar coins
-│   🌀 %prefixshop - Tienda
-│   🌀 %prefixinv - Inventario
-│   🌀 %prefixppt - Piedra, papel o tijera
-│   🌀 %prefixslot - Tragamonedas
-│
-│ ⚡ 𝙶𝙰𝙲𝙷𝙰
-│   🌀 %prefixrw - Roll waifu
-│   🌀 %prefixc - Reclamar waifu
-│
-│ ⚡ 𝙳𝙴𝚂𝙲𝙰𝚁𝙶𝙰𝚂
-│   🌀 %prefixplay - Audio YouTube
-│   🌀 %prefixplay2 - Video YouTube
-│   🌀 %prefixfb - Video Facebook
-│   🌀 %prefixtiktok - Video TikTok
-│
-│ ⚡ 𝚂𝙴𝙰𝚁𝙲𝙷
-│   🌀 %prefixtiktoksearch - Buscar TikTok
-│   🌀 %prefixapk - Buscar APK
-│   🌀 %prefixytsearch - Buscar YouTube
-│
-│ ⚡ 𝚂𝚃𝙸𝙲𝙺𝙴𝚁𝚂
-│   🌀 %prefixs - Convertir imagen a sticker
-│
-│ ⚡ 𝙸𝙽𝙵𝙾
-│   🌀 %prefixmenu - Menú principal
-│   🌀 %prefixping - Velocidad del bot
-│
-│ ⚡ 𝙾𝚆𝙽𝙴𝚁
-│   🌀 %prefixupdate - Actualizar bot
-│   🌀 %prefixrestart - Reiniciar bot
-├──────────────────────────────┤
-│ 🐉 𝐺𝑜𝑡𝑒𝑛𝑘𝑠 𝑉1 𝐵𝑜𝑡
-│ 📺 %channelName
-◣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━◢
-*𝐹𝑢𝑠𝑖𝑜𝑛 𝐻𝑎!* 🌀🐉
+│ 🤖 *Bot:* %botname
+│ 🏅 *Rango:* %tipo
+│ ⚡ *Nivel:* %level
+│ 📅 *Fecha:* %date
+│ 🕐 *Hora:* %time
+│ ⏱️ *Activo:* %uptime
+└──────────────────────────────
+
+╔══════════════════════════════╗
+║  🗡️  𝗖𝗢𝗠𝗔𝗡𝗗𝗢𝗦 𝗗𝗘𝗟 𝗥𝗘𝗜𝗡𝗢  🗡️  ║
+╚══════════════════════════════╝
+
+┌─「 💰 𝗘𝗖𝗢𝗡𝗢𝗠𝗜́𝗔 𝗗𝗘𝗟 𝗥𝗘𝗜𝗡𝗢 」
+│ 🍺 %prefixdaily — Recompensa diaria
+│ 📅 %prefixweekly — Recompensa semanal
+│ 🌙 %prefixmonthly — Recompensa mensual
+│ 🔮 %prefixritual — Invocar ritual
+│ 🎰 %prefixrt — Ruleta del destino
+│ 🗡️ %prefixcrime — Misión de robo
+│ 💃 %prefixslut — Taberna de Liones
+│ ⚒️ %prefixwork — Trabajar para el reino
+│ 🏰 %prefixdungeon — Entrar al calabozo
+│ ⛏️ %prefixmine — Minar cristales
+│ 🎣 %prefixfish — Pescar en el lago
+│ 🗺️ %prefixadventure — Aventura épica
+│ 📊 %prefixeinfo — Estado del reino
+│ 💎 %prefixbal — Ver monedas
+│ 🏆 %prefixbaltop — Ranking del reino
+│ 💸 %prefixpay — Transferir monedas
+│ 🏦 %prefixdep — Depositar al cofre
+│ 🔓 %prefixwithdraw — Retirar del cofre
+│ 🛒 %prefixshop — Mercado de Liones
+│ 🎒 %prefixinv — Ver inventario
+│ ✊ %prefixppt — Piedra papel tijera
+│ 🎰 %prefixslot — Tragamonedas mágico
+└──────────────────────────────
+
+┌─「 ✨ 𝗚𝗔𝗖𝗛𝗔 𝗗𝗘 𝗣𝗘𝗖𝗔𝗗𝗢𝗥𝗘𝗦 」
+│ 🎴 %prefixrw — Invocar Pecador
+│ 💖 %prefixc — Reclamar Pecador
+└──────────────────────────────
+
+┌─「 📥 𝗗𝗘𝗦𝗖𝗔𝗥𝗚𝗔𝗦 𝗠𝗔́𝗚𝗜𝗖𝗔𝗦 」
+│ 🎵 %prefixplay — Audio YouTube
+│ 🎬 %prefixplay2 — Video YouTube
+│ 📘 %prefixfb — Video Facebook
+│ 🎵 %prefixtiktok — Video TikTok
+└──────────────────────────────
+
+┌─「 🔍 𝗕𝗨́𝗦𝗤𝗨𝗘𝗗𝗔 𝗗𝗘𝗟 𝗗𝗥𝗨𝗜𝗗𝗔 」
+│ 🎵 %prefixtiktoksearch — Buscar TikTok
+│ 📦 %prefixapk — Buscar APK
+│ 🎬 %prefixytsearch — Buscar YouTube
+└──────────────────────────────
+
+┌─「 🎭 𝗦𝗧𝗜𝗖𝗞𝗘𝗥𝗦 𝗗𝗘𝗟 𝗥𝗘𝗜𝗡𝗢 」
+│ 🖼️ %prefixs — Imagen a sticker
+└──────────────────────────────
+
+┌─「 📜 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗖𝗜𝗢́𝗡 」
+│ 📋 %prefixmenu — Menú principal
+│ ⚡ %prefixping — Velocidad del bot
+└──────────────────────────────
+
+┌─「 👑 𝗣𝗢𝗗𝗘𝗥𝗘𝗦 𝗗𝗘𝗟 𝗖𝗥𝗘𝗔𝗗𝗢𝗥 」
+│ 🔄 %prefixupdate — Actualizar bot
+│ ♻️ %prefixrestart — Reiniciar bot
+└──────────────────────────────
+
+╔══════════════════════════════╗
+║  🔱 *%channelName*           ║
+╚══════════════════════════════╝
+❝ El poder verdadero nace
+  del corazón, no del miedo. ❞
+         — *Meliodas*
 `;
 
 export default {
-  command: ['menu', 'help', 'menú', 'ayuda', 'comandos', 'gotenksmenu'],
+  command: ['menu', 'help', 'menú', 'ayuda', 'comandos', 'nanatsu'],
   category: 'info',
   run: async (client, m, args, usedPrefix, command) => {
     try {
       const { exp, limit, level } = global.db.data.users[m.sender] || {};
       const { min, xp, max } = xpRange(level || 0, global.multiplier || 1);
-      const name = m.pushName || 'Usuario';
+      const name = m.pushName || 'Pecador';
 
       const ahora = new Date();
       const horaVenezuela = new Date(ahora.toLocaleString('en-US', { timeZone: 'America/Caracas' }));
 
-      const date = horaVenezuela.toLocaleDateString('es', { 
-        day: 'numeric', 
-        month: 'long', 
+      const date = horaVenezuela.toLocaleDateString('es', {
+        day: 'numeric',
+        month: 'long',
         year: 'numeric',
         weekday: 'long'
       });
@@ -101,32 +117,30 @@ export default {
 
       const botId = client.user.id.split(':')[0] + '@s.whatsapp.net';
       const botSettings = global.db.data.settings[botId] || {};
-      
-      let nombreBot = botSettings.namebot || 'Gotenks V1';
-      const canalId = botSettings.id || '120363404707199986@newsletter';
-      const canalName = botSettings.nameid || '✦ Gotenks V1 Bot 🐉🌀';
 
-      const imagePath = join(process.cwd(), 'lib', 'gotenks.jpg');
+      const nombreBot = botSettings.namebot || 'NanatsuBot-MD';
+      const canalId = botSettings.id || '120363404707199986@newsletter';
+      const canalName = botSettings.nameid || '⚔️ NanatsuBot-MD — Los 7 Pecados';
+
+      // Imagen del banner
+      const imagePath = join(process.cwd(), 'lib', 'nanatsu.jpg');
       let bannerFinal = null;
       if (fs.existsSync(imagePath)) {
         bannerFinal = fs.readFileSync(imagePath);
       }
 
       const isOficialBot = botId === (global.client?.user?.id?.split(':')[0] + '@s.whatsapp.net');
-      const tipo = isOficialBot ? '🐉 GOTENKS PRINCIPAL' : '🌀 SUB GOTENKS';
+      const tipo = isOficialBot ? '⚔️ Pecado Capital' : '🔱 Caballero Sagrado';
 
-      let uptimeSeconds = 0;
-      if (global.startTime) {
-        uptimeSeconds = (Date.now() - global.startTime) / 1000;
-      } else {
-        uptimeSeconds = process.uptime();
-      }
+      const uptimeSeconds = global.startTime
+        ? (Date.now() - global.startTime) / 1000
+        : process.uptime();
       const uptime = clockString(uptimeSeconds * 1000);
 
       let menu = defaultMenu
         .replace(/%botname/g, nombreBot)
         .replace(/%name/g, name)
-        .replace(/%greeting/g, getUwUGreeting(horaVenezuela.getHours()))
+        .replace(/%greeting/g, getNanatsuGreeting(horaVenezuela.getHours()))
         .replace(/%tipo/g, tipo)
         .replace(/%level/g, level || 0)
         .replace(/%date/g, date)
@@ -158,10 +172,10 @@ export default {
       await client.sendMessage(m.chat, messageContent, { quoted: m });
 
     } catch (e) {
-      console.error('Error en menu Gotenks:', e);
-      await client.reply(m.chat, 
-        `🐉🌀 *¡Ups! Algo salió mal*\n\n⚡ Error: ${e.message}`, 
-        m
+      console.error('Error en menu NanatsuBot:', e);
+      await client.sendMessage(m.chat,
+        { text: `⚔️ *NanatsuBot-MD*\n\n🔴 *Error del Reino*\n\`\`\`${e.message}\`\`\`\n\n❝ Hasta los Pecados cometen errores. ❞` },
+        { quoted: m }
       );
     }
   }
@@ -172,42 +186,42 @@ function clockString(ms) {
   const horas = Math.floor((ms % 86400000) / 3600000);
   const minutos = Math.floor((ms % 3600000) / 60000);
   const segundos = Math.floor((ms % 60000) / 1000);
-  
+
   const partes = [];
   if (dias > 0) partes.push(`${dias}d`);
   if (horas > 0 || dias > 0) partes.push(`${horas}h`);
   if (minutos > 0 || horas > 0 || dias > 0) partes.push(`${minutos}m`);
   partes.push(`${segundos}s`);
-  
+
   return partes.join(' ');
 }
 
-function getUwUGreeting(hour) {
+function getNanatsuGreeting(hour) {
   const greetings = {
-    0: 'una noche mágica bajo las estrellas 🌙✨',
-    1: 'una noche de sueños Saiyan 💤🌀',
-    2: 'una noche llena de energía Ki 🌌⚡',
-    3: 'un amanecer en la Sala del Tiempo 🌅⏳',
-    4: 'un amanecer de meditación 🧘🌀',
-    5: 'un entrenamiento con King Kai 👑🌅',
-    6: 'una mañana de Kamehameha en la playa 🏖️🌀',
-    7: 'una mañana en Kame House 🏠🐢',
-    8: 'una mañana volando en Nimbus ☁️🌀',
-    9: 'una mañana en el Tenkaichi Budokai 🥋🎯',
-    10: 'un día de batalla en Cell Games ⚔️💥',
-    11: 'un día de Torneo del Poder 💪🌟',
-    12: 'un día soleado en Namek 🌍☀️',
-    13: 'una tarde de entrenamiento con Whis 🥛🌀',
-    14: 'una tarde en la Cámara Hipertérmica ⏱️✨',
-    15: 'una tarde de fusiones en el dojo 🔄🌸',
-    16: 'una tarde de transformaciones Saiyan 🌀💫',
-    17: 'un atardecer después del Genkidama 🌇⚡',
-    18: 'una noche de recuperación en la cápsula 💊🏥',
-    19: 'una noche viendo las estrellas Saiyan 🌠🐉',
-    20: 'una noche de cuentos del Planeta Vegeta 🪐📖',
-    21: 'una noche preparando Semillas Senzu 🌱🍡',
-    22: 'una noche protegiendo la Tierra 🌎🛡️',
-    23: 'una noche de vigilia Saiyan 🌃🌸',
+    0:  'una noche misteriosa en el Bosque Sagrado 🌙🌲',
+    1:  'una noche oscura en el Castillo de Liones 🏰🌑',
+    2:  'una noche de poder bajo las estrellas del reino 🌌⚔️',
+    3:  'un amanecer en las tierras de Britannia 🌅🗺️',
+    4:  'un amanecer meditando con el poder del Pecado 🧘⚔️',
+    5:  'un entrenamiento secreto con los 7 Pecados 🌄🔱',
+    6:  'una mañana de Full Counter en el horizonte ☀️🛡️',
+    7:  'una mañana en la Taberna Ambulante del Jabalí 🍺🐗',
+    8:  'una mañana volando sobre Britannia 🌤️🦅',
+    9:  'una mañana en el Gran Torneo de Liones 🥋🏆',
+    10: 'un día de batalla contra el Clan Demonio ⚔️💥',
+    11: 'un día en el Torneo de los Diez Mandamientos 👁️🌟',
+    12: 'un día soleado en el Bosque de las Hadas 🌳☀️',
+    13: 'una tarde entrenando el poder del Pecado 🌀💪',
+    14: 'una tarde explorando las ruinas de Camelot 🏰✨',
+    15: 'una tarde forjando alianzas en el reino 🤝🌸',
+    16: 'una tarde de transformaciones y poder 💫🔱',
+    17: 'un atardecer después de la Gran Batalla 🌇⚔️',
+    18: 'una noche de recuperación en la taberna 🍻🌙',
+    19: 'una noche viendo las estrellas de Britannia 🌠🐉',
+    20: 'una noche de leyendas del Reino de Liones 🪐📜',
+    21: 'una noche preparando el próximo combate ⚔️🌱',
+    22: 'una noche protegiendo el reino de Britannia 🌎🛡️',
+    23: 'una noche de guardia junto a los 7 Pecados 🌃⚔️',
   };
-  return 'Espero que tengas ' + (greetings[hour] || 'un día increíble lleno de poder Saiyan~ 🌸✨');
+  return 'Espero que tengas ' + (greetings[hour] || 'un día digno de un Pecado Capital ⚔️🔱');
 }
