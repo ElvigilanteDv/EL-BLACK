@@ -125,18 +125,7 @@ export default {
         .replace(/%prefix/g, usedPrefix)
         .replace(/%channelName/g, canalName);
 
-      const messageContent = {
-        contextInfo: {
-          mentionedJid: [m.sender],
-          forwardingScore: 999,
-          isForwarded: true,
-          forwardedNewsletterMessageInfo: {
-            newsletterJid: canalId,
-            newsletterName: canalName,
-            serverMessageId: ''
-          }
-        }
-      };
+      const messageContent = {};
 
       if (bannerFinal) {
         messageContent.image = bannerFinal;
