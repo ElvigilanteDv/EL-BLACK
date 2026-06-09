@@ -42,7 +42,7 @@ function normalizePhoneForPairing(input) {
 
 const { say } = cfonts
 console.log(chalk.magentaBright('\n⚔️❀ NanatsuBot-MD Iniciando... ❀⏳'))
-say('Gotenks V1', {
+say('NanatsuBot MD', {
   align: 'center',           
   gradient: ['yellow', 'red'] 
 })
