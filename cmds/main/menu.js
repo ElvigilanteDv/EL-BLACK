@@ -94,6 +94,17 @@ export default {
       const botId = client.user.id.split(':')[0] + '@s.whatsapp.net';
       const botSettings = global.db.data.settings[botId] || {};
 
+ const nombreBot = botSettings.namebot || 'NanatsuBot-MD';
+      const canalId = botSettings.id || '120363404707199986@newsletter';
+      const canalName = botSettings.nameid || '⚔️ NanatsuBot-MD — Los 7 Pecados';
+
+      // Imagen del banner
+      const imagePath = join(process.cwd(), 'lib', 'nanatsu.jpg');
+      let bannerFinal = null;
+      if (fs.existsSync(imagePath)) {
+        bannerFinal = fs.readFileSync(imagePath);
+      }
+
       const isOficialBot = botId === (global.client?.user?.id?.split(':')[0] + '@s.whatsapp.net');
       const tipo = isOficialBot ? '⚔️ Pecado Capital' : '🔱 Caballero Sagrado';
 
