@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-global.owner = ['59177474230','']
+global.owner = ['51910227479','']
 global.botNumber = ''
 
 global.sessionName = 'Sessions/Owner'
