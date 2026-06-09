@@ -50,7 +50,7 @@ const dianaMenu = `
 └──────────────────────────────
 
 ╔══════════════════════════════╗
-║  🐍 *%channelName*           ║
+║  🐍 *amilkarGit*           ║
 ╚══════════════════════════════╝
 ❝ El tamaño no define
   la fuerza del corazón. ❞
