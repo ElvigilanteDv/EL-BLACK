@@ -29,8 +29,8 @@ global.links = {
 
 // 📢 CANAL OFICIAL
 global.my = {
-    ch:   '120363407253@newsletter',
-    name: '⚔️✦ The Dev Room — NanatsuBot-MD ✦🔱',
+    ch:   '0029VbCv5KCAe5Vpc1nH6u1Y@newsletter',
+    name: '⚔️✦ AmiIkarGit — NanatsuBot-MD ✦🔱',
 }
 
 // ⚠️ MENSAJES DEL SISTEMA
