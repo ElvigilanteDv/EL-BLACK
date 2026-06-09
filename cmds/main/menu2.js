@@ -58,7 +58,7 @@ const dianaMenu = `
 `;
 
 export default {
-  command: ['menu', 'help', 'menú', 'ayuda', 'dianamenu'],
+  command: ['dianamenu'],
   category: 'info',
   run: async (client, m, args, usedPrefix, command) => {
     try {
