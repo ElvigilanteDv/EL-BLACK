@@ -7,9 +7,7 @@ const rollLocks = new Map();
 function cleanOldLocks() {
   const now = Date.now();
   for (const [userId, lockTime] of rollLocks.entries()) {
-    if (now - lockTime > 30000) {
-      rollLocks.delete(userId);
-    }
+    if (now - lockTime > 30000) rollLocks.delete(userId);
   }
 }
 
@@ -28,7 +26,9 @@ function flattenCharacters(db) {
 }
 
 function getSeriesNameByCharacter(db, id) {
-  return Object.entries(db).find(([, serie]) => Array.isArray(serie.characters) && serie.characters.some(c => String(c.id) === String(id)))?.[1]?.name || 'Desconocido';
+  return Object.entries(db).find(([, serie]) =>
+    Array.isArray(serie.characters) && serie.characters.some(c => String(c.id) === String(id))
+  )?.[1]?.name || 'Desconocido';
 }
 
 function formatTag(tag) {
@@ -45,52 +45,91 @@ function getRefererForUrl(url) {
 async function buscarImagenDelirius(tag) {
   const query = formatTag(tag);
   const sources = [
-    { url: `https://safebooru.org/index.php?page=dapi&s=post&q=index&json=1&tags=${query}&limit=100`, extract: (data) => {
+    {
+      url: `https://safebooru.org/index.php?page=dapi&s=post&q=index&json=1&tags=${query}&limit=100`,
+      extract: (data) => {
         const posts = Array.isArray(data) ? data : data?.post || [];
-        return posts.map(i => i?.file_url || (i?.directory && i?.image ? `https://safebooru.org/images/${i.directory}/${i.image}` : null)).filter(u => typeof u === 'string' && /\.(jpe?g|png)(\?.*)?$/i.test(u));
-    }},
-    { url: `https://danbooru.donmai.us/posts.json?tags=${query}&limit=100`, extract: (data) => {
+        return posts.map(i => i?.file_url || (i?.directory && i?.image
+          ? `https://safebooru.org/images/${i.directory}/${i.image}` : null))
+          .filter(u => typeof u === 'string' && /\.(jpe?g|png)(\?.*)?$/i.test(u));
+      }
+    },
+    {
+      url: `https://danbooru.donmai.us/posts.json?tags=${query}&limit=100`,
+      extract: (data) => {
         const posts = Array.isArray(data) ? data : [];
-        return posts.map(i => i?.file_url || i?.large_file_url).filter(u => typeof u === 'string' && /\.(jpe?g|png)(\?.*)?$/i.test(u));
-    }},
-    { url: `https://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&tags=${query}&limit=100&api_key=98f554258c88c44f4dd28ccde0c28f36682b2a992490ab35ebcc7baf7e196a86d7550b174bce577b8cc3f544e9b3ad0f6aeb09ad63bf89a9141cc3eddb6fbfd2&user_id=1917269`, extract: (data) => {
+        return posts.map(i => i?.file_url || i?.large_file_url)
+          .filter(u => typeof u === 'string' && /\.(jpe?g|png)(\?.*)?$/i.test(u));
+      }
+    },
+    {
+      url: `https://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&tags=${query}&limit=100&api_key=98f554258c88c44f4dd28ccde0c28f36682b2a992490ab35ebcc7baf7e196a86d7550b174bce577b8cc3f544e9b3ad0f6aeb09ad63bf89a9141cc3eddb6fbfd2&user_id=1917269`,
+      extract: (data) => {
         const posts = Array.isArray(data) ? data : data?.post || data?.data || [];
-        return posts.map(i => i?.file_url).filter(u => typeof u === 'string' && /\.(jpe?g|png)(\?.*)?$/i.test(u));
-    }}
+        return posts.map(i => i?.file_url)
+          .filter(u => typeof u === 'string' && /\.(jpe?g|png)(\?.*)?$/i.test(u));
+      }
+    }
   ];
+
   const results = await Promise.allSettled(sources.map(async (source) => {
-    const res = await axios.get(source.url, { headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' }, timeout: 8000 });
+    const res = await axios.get(source.url, {
+      headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' },
+      timeout: 8000
+    });
     return source.extract(res.data);
   }));
-  const allUrls = results.filter(r => r.status === 'fulfilled' && r.value.length > 0).flatMap(r => r.value);
+
+  const allUrls = results
+    .filter(r => r.status === 'fulfilled' && r.value.length > 0)
+    .flatMap(r => r.value);
   return [...new Set(allUrls)];
 }
 
 export default {
   command: ['rw', 'rollwaifu', 'roll'],
   category: 'gacha',
+  description: 'Invocar un personaje del reino de Britannia.',
   run: async (client, m, args, usedPrefix, command) => {
     const userId = m.sender;
     const chatId = m.chat;
     cleanOldLocks();
+
+    // 🔒 Anti-spam lock
     if (rollLocks.has(userId)) {
       const lockTime = rollLocks.get(userId);
-      const now = Date.now();
-      if (now - lockTime < 15000) return;
+      if (Date.now() - lockTime < 15000) return;
       rollLocks.delete(userId);
     }
+
     const chats = global.db.data.chats;
     const chat = chats[chatId];
+
+    // ❌ Gacha desactivado
     if (chat.adminonly || !chat.gacha) {
-      return m.reply(`🐉🌀 Los comandos de *Gacha* están desactivados en este grupo.\n\n⚡ Un *administrador* puede activarlos con el comando:\n» *${usedPrefix}gacha on*`);
+      return m.reply(
+        `╔══════════════════════╗\n` +
+        `   ⚔️ *NANATSU BOT - MD*\n` +
+        `╚══════════════════════╝\n\n` +
+        `🚫 *El Gacha está desactivado*\n` +
+        `en este reino.\n\n` +
+        `🛡️ Un *Caballero Sagrado* puede\n` +
+        `activarlo con:\n` +
+        `» *${usedPrefix}gacha on*`
+      );
     }
+
+    // 🔧 Inicializar datos
     if (!chat.users) chat.users = {};
     if (!chat.users[userId]) chat.users[userId] = {};
     if (!chat.characters) chat.characters = {};
     chat.rolls ||= {};
+
     const me = chat.users[userId];
     const now = Date.now();
     const cooldown = 15 * 60 * 1000;
+
+    // ⏳ Cooldown activo
     if (me.lastRoll && now < me.lastRoll) {
       const r = Math.ceil((me.lastRoll - now) / 1000);
       const min = Math.floor(r / 60);
@@ -98,9 +137,20 @@ export default {
       let timeText = '';
       if (min > 0) timeText += `${min} minuto${min !== 1 ? 's' : ''} `;
       if (sec > 0 || timeText === '') timeText += `${sec} segundo${sec !== 1 ? 's' : ''}`;
-      return m.reply(`🐉🌀 Debes esperar *${timeText.trim()}* para usar *${usedPrefix + 'rw'}* de nuevo.`);
+      return m.reply(
+        `╔══════════════════════╗\n` +
+        `   ⚔️ *NANATSU BOT - MD*\n` +
+        `╚══════════════════════╝\n\n` +
+        `⏳ *Poder en recarga*\n\n` +
+        `🕐 Espera *${timeText.trim()}*\n` +
+        `antes de invocar de nuevo.\n\n` +
+        `❝ Los Pecados también\n` +
+        `   necesitan descansar. ❞`
+      );
     }
+
     rollLocks.set(userId, now);
+
     try {
       const db = await loadCharacters();
       const all = flattenCharacters(db);
@@ -110,34 +160,90 @@ export default {
       const baseTag = formatTag(selected.tags?.[0] || '');
       const mediaList = await buscarImagenDelirius(baseTag);
       const media = mediaList[Math.floor(Math.random() * mediaList.length)];
+
+      // ❌ Sin imagen
       if (!media) {
         rollLocks.delete(userId);
-        return m.reply(`🐉🌀 No se encontró imágenes para el personaje *${selected.name}*.`);
+        return m.reply(
+          `╔══════════════════════╗\n` +
+          `   ⚔️ *NANATSU BOT - MD*\n` +
+          `╚══════════════════════╝\n\n` +
+          `💀 *Invocación fallida*\n\n` +
+          `🎴 No se encontró imagen\n` +
+          `para *${selected.name}*.\n\n` +
+          `🔄 Intenta invocar de nuevo.`
+        );
       }
+
+      // 📦 Preparar datos del personaje
       if (!chat.characters[selected.id]) chat.characters[selected.id] = {};
       const record = chat.characters[selected.id];
       const globalRec = global.db.data.characters?.[selected.id] || {};
-      record.name = String(selected.name || 'Sin nombre');
-      record.value = typeof globalRec.value === 'number' ? globalRec.value : Number(selected.value) || 100;
-      record.votes = Number(record.votes || globalRec.votes || 0);
-      record.reservedBy = userId;
-      record.reservedUntil = now + 20000;
-      record.expiresAt = now + 60000;
-      const owner = typeof record?.user === 'string' && record.user.length ? (global.db.data.users?.[record.user]?.name || record.user.split('@')[0]).trim() : 'desconocido';
-      const msg = `🐉🌀 *GOTENKS V1 GACHA* 🌀🐉
 
-⚡ *Nombre* » ${record.name}
-🌀 *Género* » ${selected.gender || 'Desconocido'}
-🐉 *Valor* » ${record.value.toLocaleString()}
-⚡ *Estado* » ${record.user ? `Reclamado por ${owner}` : 'Libre'}
-🌀 *Fuente* » ${source}`;
-      const imgRes = await axios.get(media, { responseType: 'arraybuffer', timeout: 15000, headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', 'Referer': getRefererForUrl(media) } });
+      record.name      = String(selected.name || 'Sin nombre');
+      record.value     = typeof globalRec.value === 'number' ? globalRec.value : Number(selected.value) || 100;
+      record.votes     = Number(record.votes || globalRec.votes || 0);
+      record.reservedBy    = userId;
+      record.reservedUntil = now + 20000;
+      record.expiresAt     = now + 60000;
+
+      const owner = typeof record?.user === 'string' && record.user.length
+        ? (global.db.data.users?.[record.user]?.name || record.user.split('@')[0]).trim()
+        : null;
+
+      // ✨ Rareza visual según valor
+      let rareza = '⭐ Común';
+      if (record.value >= 1000) rareza = '🌟 Legendario';
+      else if (record.value >= 500) rareza = '💎 Épico';
+      else if (record.value >= 250) rareza = '🔮 Raro';
+
+      const msg =
+        `╔══════════════════════╗\n` +
+        `   ⚔️ *NANATSU BOT - MD*\n` +
+        `   🔱 *INVOCACIÓN DEL REINO*\n` +
+        `╚══════════════════════╝\n\n` +
+        `🎴 *Personaje invocado*\n\n` +
+        `┣ 📛 *Nombre:* ${record.name}\n` +
+        `┣ ⚧️ *Género:* ${selected.gender || 'Desconocido'}\n` +
+        `┣ 💰 *Valor:* ${record.value.toLocaleString()}\n` +
+        `┣ ✨ *Rareza:* ${rareza}\n` +
+        `┣ 📖 *Fuente:* ${source}\n` +
+        `┗ 👤 *Estado:* ${owner ? `Reclamado por *${owner}*` : '🟢 Libre'}\n\n` +
+        `❝ Usa *${usedPrefix}c* citando este\n` +
+        `   mensaje para reclamarlo. ❞`;
+
+      const imgRes = await axios.get(media, {
+        responseType: 'arraybuffer',
+        timeout: 15000,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+          'Referer': getRefererForUrl(media)
+        }
+      });
+
       const buffer = Buffer.from(imgRes.data);
       const sent = await client.sendMessage(chatId, { image: buffer, caption: msg }, { quoted: m });
-      chat.rolls[sent.key.id] = { id, name: record.name, expiresAt: record.expiresAt, reservedBy: userId, reservedUntil: record.reservedUntil };
+
+      chat.rolls[sent.key.id] = {
+        id,
+        name: record.name,
+        expiresAt:     record.expiresAt,
+        reservedBy:    userId,
+        reservedUntil: record.reservedUntil
+      };
+
       me.lastRoll = now + cooldown;
+
     } catch (e) {
-      await m.reply(`🐉🌀 An unexpected error occurred while executing command *${usedPrefix + command}*.\n⚡ [Error: *${e.message}*]`);
+      await m.reply(
+        `╔══════════════════════╗\n` +
+        `   ⚔️ *NANATSU BOT - MD*\n` +
+        `╚══════════════════════╝\n\n` +
+        `🔴 *Error en la invocación*\n\n` +
+        `\`\`\`${e.message}\`\`\`\n\n` +
+        `❝ Hasta los Pecados\n` +
+        `   tienen límites. ❞`
+      );
     } finally {
       rollLocks.delete(userId);
     }
