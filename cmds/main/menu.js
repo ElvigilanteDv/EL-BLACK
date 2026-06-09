@@ -58,7 +58,7 @@ const defaultMenu = `
 └──────────────────────────────
 
 ╔══════════════════════════════╗
-║  🔱 *%channelName*           ║
+║  🔱 *AmilcarGit*           ║
 ╚══════════════════════════════╝
 ❝ El poder verdadero nace
   del corazón, no del miedo. ❞
