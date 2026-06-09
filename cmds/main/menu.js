@@ -24,31 +24,6 @@ const defaultMenu = `
 ║  🗡️  𝗖𝗢𝗠𝗔𝗡𝗗𝗢𝗦 𝗗𝗘𝗟 𝗥𝗘𝗜𝗡𝗢  🗡️  ║
 ╚══════════════════════════════╝
 
-┌─「 💰 𝗘𝗖𝗢𝗡𝗢𝗠𝗜́𝗔 𝗗𝗘𝗟 𝗥𝗘𝗜𝗡𝗢 」
-│ 🍺 %prefixdaily — Recompensa diaria
-│ 📅 %prefixweekly — Recompensa semanal
-│ 🌙 %prefixmonthly — Recompensa mensual
-│ 🔮 %prefixritual — Invocar ritual
-│ 🎰 %prefixrt — Ruleta del destino
-│ 🗡️ %prefixcrime — Misión de robo
-│ 💃 %prefixslut — Taberna de Liones
-│ ⚒️ %prefixwork — Trabajar para el reino
-│ 🏰 %prefixdungeon — Entrar al calabozo
-│ ⛏️ %prefixmine — Minar cristales
-│ 🎣 %prefixfish — Pescar en el lago
-│ 🗺️ %prefixadventure — Aventura épica
-│ 📊 %prefixeinfo — Estado del reino
-│ 💎 %prefixbal — Ver monedas
-│ 🏆 %prefixbaltop — Ranking del reino
-│ 💸 %prefixpay — Transferir monedas
-│ 🏦 %prefixdep — Depositar al cofre
-│ 🔓 %prefixwithdraw — Retirar del cofre
-│ 🛒 %prefixshop — Mercado de Liones
-│ 🎒 %prefixinv — Ver inventario
-│ ✊ %prefixppt — Piedra papel tijera
-│ 🎰 %prefixslot — Tragamonedas mágico
-└──────────────────────────────
-
 ┌─「 ✨ 𝗚𝗔𝗖𝗛𝗔 𝗗𝗘 𝗣𝗘𝗖𝗔𝗗𝗢𝗥𝗘𝗦 」
 │ 🎴 %prefixrw — Invocar Pecador
 │ 💖 %prefixc — Reclamar Pecador
