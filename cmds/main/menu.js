@@ -31,7 +31,7 @@ const defaultMenu = `
 
 ┌─「 🫧 GRUPOS 」
 │ 🎴 %prefixkick — expulsar a un integrante 
-│ 💖 %prefixctag — menciona a todos del grupo
+│ 💖 %prefixtag — menciona a todos del grupo
 └──────────────────────────────
 
 ┌─「 🔍 𝗕𝗨́𝗦𝗤𝗨𝗘𝗗𝗔 𝗗𝗘𝗟 𝗗𝗥𝗨𝗜𝗗𝗔 」
