@@ -29,6 +29,11 @@ const defaultMenu = `
 │ 💖 %prefixc — Reclamar Pecador
 └──────────────────────────────
 
+┌─「 🫧 GRUPOS 」
+│ 🎴 %prefixkick — expulsar a un integrante 
+│ 💖 %prefixctag — menciona a todos del grupo
+└──────────────────────────────
+
 ┌─「 🔍 𝗕𝗨́𝗦𝗤𝗨𝗘𝗗𝗔 𝗗𝗘𝗟 𝗗𝗥𝗨𝗜𝗗𝗔 」
 │ 🎵 %prefixtiktoksearch — Buscar TikTok
 │ 📦 %prefixapk — Buscar APK
