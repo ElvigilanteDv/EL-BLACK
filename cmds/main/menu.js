@@ -29,13 +29,6 @@ const defaultMenu = `
 │ 💖 %prefixc — Reclamar Pecador
 └──────────────────────────────
 
-┌─「 📥 𝗗𝗘𝗦𝗖𝗔𝗥𝗚𝗔𝗦 𝗠𝗔́𝗚𝗜𝗖𝗔𝗦 」
-│ 🎵 %prefixplay — Audio YouTube
-│ 🎬 %prefixplay2 — Video YouTube
-│ 📘 %prefixfb — Video Facebook
-│ 🎵 %prefixtiktok — Video TikTok
-└──────────────────────────────
-
 ┌─「 🔍 𝗕𝗨́𝗦𝗤𝗨𝗘𝗗𝗔 𝗗𝗘𝗟 𝗗𝗥𝗨𝗜𝗗𝗔 」
 │ 🎵 %prefixtiktoksearch — Buscar TikTok
 │ 📦 %prefixapk — Buscar APK
@@ -50,6 +43,7 @@ const defaultMenu = `
 │ 📋 %prefixmenu — Menú principal
 │ ⚡ %prefixping — Velocidad del bot
 │ 🐍 %prefixdianamenu — menú de Diana 
+│ 👑 %prefixmeliodasmenu — Menu del Capitan
 │ 🎯 %prefixsubbot — Aste subbot 
 └──────────────────────────────
 
