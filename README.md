@@ -61,31 +61,28 @@ termux-setup-storage
 
 3.  **Clona el Repositorio del Bot**
     ```bash
-    git clone https://github.com/AmilcarGit/ElyssiaBot-MD.git
+    git clone https://github.com/AmilcarGit/NanatsuBot-MD.git
     ```
 
 4.  **Accede al Directorio del Proyecto**
     ```bash
-    cd ElyssiaBot-MD
+    cd NanatsuBot-MD
     ```
 
 5.  **Instala las Dependencias de Node.js**
     ```bash
     npm install
-    ```
-6.  **Mejora el Rendimiento del Bot**
-    ```bash
-    "start": "node --expose-gc index.js"
-    ```
+    ``` 
 
-7.  **Inicia el Bot**
+6.  **Inicia el Bot**
     ```bash
     npm start
     ```
+
 🛠️ Requisitos
 Node.js 18 o superior
 Git
-Conexión a Internet estable
+Conexión a Internet estable 
 
 ---
 
