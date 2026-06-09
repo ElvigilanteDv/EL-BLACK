@@ -37,7 +37,7 @@ const meliodasMenu = `
 └──────────────────────────────
 
 ╔══════════════════════════════╗
-║  🐉 *%channelName*           ║
+║  👑 *AMILKARGIT  OFC*           ║
 ╚══════════════════════════════╝
 ❝ No importa cuántas veces
   caiga, siempre me levantaré. ❞
