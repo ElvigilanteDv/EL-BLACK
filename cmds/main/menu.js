@@ -50,6 +50,7 @@ const defaultMenu = `
 │ 📋 %prefixmenu — Menú principal
 │ ⚡ %prefixping — Velocidad del bot
 │ 🐍 %prefixdianamenu — menú de Diana 
+│ 🎯 %prefixsubbot — Aste subbot 
 └──────────────────────────────
 
 ┌─「 👑 𝗣𝗢𝗗𝗘𝗥𝗘𝗦 𝗗𝗘𝗟 𝗖𝗥𝗘𝗔𝗗𝗢𝗥 」
