@@ -9,7 +9,7 @@ global.dev = "⚡ Powered by Gotenks V1 Bot ⚡"
 global.wm = "NanatsuBot-MD 🐉"
 global.links = {
 api: 'Gotenks API 🌀',
-channel: "https://whatsapp.com/channel/0029Vb7ntULLY6d8uOvyDy0C",
+channel: "https://whatsapp.com/channel/0029VbCv5KCAe5Vpc1nH6u1Y",
 github: "https://github.com/dvwilker",
 gmail: "developer.wilker.ofc@gmail.com"
 }
