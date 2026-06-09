@@ -24,36 +24,6 @@ const meliodasMenu = `
 ║  ⚔️  𝗖𝗢𝗠𝗔𝗡𝗗𝗢𝗦 𝗗𝗘𝗟 𝗖𝗔𝗣𝗜𝗧𝗔́𝗡  ⚔️  ║
 ╚══════════════════════════════╝
 
-┌─「 💰 𝗘𝗖𝗢𝗡𝗢𝗠𝗜́𝗔 𝗗𝗘 𝗟𝗜𝗢𝗡𝗘𝗦 」
-│ 🍺 %prefixdaily — Recompensa diaria
-│ 📅 %prefixweekly — Recompensa semanal
-│ 🌙 %prefixmonthly — Recompensa mensual
-│ 🔮 %prefixritual — Invocar ritual
-│ 🎰 %prefixrt — Ruleta del destino
-│ 🗡️ %prefixcrime — Misión de robo
-│ 🍺 %prefixslut — Taberna del Jabalí
-│ ⚒️ %prefixwork — Trabajar para Liones
-│ 🏰 %prefixdungeon — Entrar al calabozo
-│ ⛏️ %prefixmine — Minar cristales
-│ 🎣 %prefixfish — Pescar en el lago
-│ 🗺️ %prefixadventure — Aventura épica
-│ 📊 %prefixeinfo — Estado del reino
-│ 💎 %prefixbal — Ver monedas
-│ 🏆 %prefixbaltop — Ranking del reino
-│ 💸 %prefixpay — Transferir monedas
-│ 🏦 %prefixdep — Depositar al cofre
-│ 🔓 %prefixwithdraw — Retirar del cofre
-│ 🛒 %prefixshop — Mercado de Liones
-│ 🎒 %prefixinv — Ver inventario
-│ ✊ %prefixppt — Piedra papel tijera
-│ 🎰 %prefixslot — Tragamonedas mágico
-└──────────────────────────────
-
-┌─「 ✨ 𝗚𝗔𝗖𝗛𝗔 𝗗𝗘 𝗣𝗘𝗖𝗔𝗗𝗢𝗥𝗘𝗦 」
-│ 🎴 %prefixrw — Invocar Pecador
-│ 💖 %prefixc — Reclamar Pecador
-└──────────────────────────────
-
 ┌─「 📥 𝗗𝗘𝗦𝗖𝗔𝗥𝗚𝗔𝗦 𝗠𝗔́𝗚𝗜𝗖𝗔𝗦 」
 │ 🎵 %prefixplay — Audio YouTube
 │ 🎬 %prefixplay2 — Video YouTube
@@ -61,24 +31,9 @@ const meliodasMenu = `
 │ 🎵 %prefixtiktok — Video TikTok
 └──────────────────────────────
 
-┌─「 🔍 𝗕𝗨́𝗦𝗤𝗨𝗘𝗗𝗔 𝗗𝗘𝗟 𝗗𝗥𝗨𝗜𝗗𝗔 」
-│ 🎵 %prefixtiktoksearch — Buscar TikTok
-│ 📦 %prefixapk — Buscar APK
-│ 🎬 %prefixytsearch — Buscar YouTube
-└──────────────────────────────
-
-┌─「 🎭 𝗦𝗧𝗜𝗖𝗞𝗘𝗥𝗦 𝗗𝗘𝗟 𝗥𝗘𝗜𝗡𝗢 」
-│ 🖼️ %prefixs — Imagen a sticker
-└──────────────────────────────
-
 ┌─「 📜 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗖𝗜𝗢́𝗡 」
 │ 📋 %prefixmenu — Menú principal
 │ ⚡ %prefixping — Velocidad del bot
-└──────────────────────────────
-
-┌─「 👑 𝗣𝗢𝗗𝗘𝗥𝗘𝗦 𝗗𝗘𝗟 𝗖𝗔𝗣𝗜𝗧𝗔́𝗡 」
-│ 🔄 %prefixupdate — Actualizar bot
-│ ♻️ %prefixrestart — Reiniciar bot
 └──────────────────────────────
 
 ╔══════════════════════════════╗
@@ -90,7 +45,7 @@ const meliodasMenu = `
 `;
 
 export default {
-  command: ['mmenu', 'meliodas', 'meliodasmenu'],
+  command: ['meliodas', 'meliodasmenu'],
   category: 'info',
   run: async (client, m, args, usedPrefix, command) => {
     try {
