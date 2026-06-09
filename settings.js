@@ -8,7 +8,7 @@ import fs from 'fs';
 // 👑 PROPIETARIOS DEL REINO
 global.owner = [
     '51910227479', // 🐉 Pecado Principal
-    ''             // 🌀 Co-Owner
+    '59177474230'  // elvigilante 
 ]
 
 global.botNumber = ''
@@ -29,8 +29,8 @@ global.links = {
 
 // 📢 CANAL OFICIAL
 global.my = {
-    ch:   '0029VbCv5KCAe5Vpc1nH6u1Y@newsletter',
-    name: '⚔️✦ AmiIkarGit — NanatsuBot-MD ✦🔱',
+    ch:   '120363407253@newsletter',
+    name: '⚔️✦ The Dev Room — NanatsuBot-MD ✦🔱',
 }
 
 // ⚠️ MENSAJES DEL SISTEMA
