@@ -14,7 +14,7 @@ github: "https://github.com/dvwilker",
 gmail: "developer.wilker.ofc@gmail.com"
 }
 global.my = {
-ch: '120363404707199986@newsletter',
+ch: '0029VbCv5KCAe5Vpc1nH6u1Y@newsletter',
 name: '🐉✦ Gotenks V1 Bot ✦🌀',
 }
 
