@@ -1,12 +1,12 @@
 import fs from 'fs';
 
-global.owner = ['5492644138998','584125877491']
+global.owner = ['59177474230','']
 global.botNumber = ''
 
 global.sessionName = 'Sessions/Owner'
-global.version = '🐉🌀 3.0 - Gotenks V1 🌀🐉'
+global.version = '⚔️⏳ 3.0 - NanatsuBot-MD 🌀⚔️'
 global.dev = "⚡ Powered by Gotenks V1 Bot ⚡"
-global.wm = "Gotenks-V1 🐉"
+global.wm = "NanatsuBot-MD 🐉"
 global.links = {
 api: 'Gotenks API 🌀',
 channel: "https://whatsapp.com/channel/0029Vb7ntULLY6d8uOvyDy0C",
