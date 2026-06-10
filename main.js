@@ -34,9 +34,9 @@ export default async (client, m) => {
     groupMetadata = await client.groupMetadata(m.chat).catch(() => null)
     groupName = groupMetadata?.subject || ''
     groupAdmins = groupMetadata?.participants.filter(p => (p.admin === 'admin' || p.admin === 'superadmin')) || []
-  }  
-  const isBotAdmins = m.isGroup ? groupAdmins.some(p => p.phoneNumber === botJid || p.jid === botJid || p.id === botJid || p.lid === botJid ) : false
-  const isAdmins = m.isGroup ? groupAdmins.some(p => p.phoneNumber === sender || p.jid === sender || p.id === sender || p.lid === sender ) : false
+  }
+  const isBotAdmins = m.isGroup ? groupAdmins.some(p => p.phoneNumber === botJid || p.jid === botJid || p.id === botJid || p.lid === botJid) : false
+  const isAdmins = m.isGroup ? groupAdmins.some(p => p.phoneNumber === sender || p.jid === sender || p.id === sender || p.lid === sender) : false
   const isOwners = [botJid, ...(settings.owner ? [settings.owner] : []), ...global.owner.map(num => num + '@s.whatsapp.net')].includes(sender);
 
   for (const name in global.plugins) {
@@ -55,15 +55,18 @@ export default async (client, m) => {
   if (!users.stats[today]) users.stats[today] = { msgs: 0, cmds: 0 };
   users.stats[today].msgs++;
 
-  const rawBotname = settings.namebot || 'Natsumi';
-  const tipo = settings.type || 'Kawaii';
+  const rawBotname = settings.namebot || 'WangLing';
+  const tipo = settings.type || 'Inmortal';
   const cleanBotname = rawBotname.replace(/[^a-zA-Z0-9\s]/g, '')
-  const namebot = cleanBotname || 'Natsumi';
+  const namebot = cleanBotname || 'WangLing';
   const shortForms = [namebot.charAt(0), namebot.split(" ")[0], tipo.split(" ")[0], namebot.split(" ")[0].slice(0, 2), namebot.split(" ")[0].slice(0, 3)];
   const prefixes = shortForms.map(name => `${name}`);
   prefixes.unshift(namebot);
+
   let prefix;
-  if (Array.isArray(settings.prefix) || typeof settings.prefix === 'string') {
+  if (!settings.prefix || (Array.isArray(settings.prefix) && settings.prefix.length === 0)) {
+    prefix = new RegExp('^', 'i');
+  } else if (Array.isArray(settings.prefix) || typeof settings.prefix === 'string') {
     const prefixArray = Array.isArray(settings.prefix) ? settings.prefix : [settings.prefix];
     prefix = new RegExp('^(' + prefixes.join('|') + ')?(' + prefixArray.map(p => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')', 'i');
   } else if (settings.prefix === true) {
@@ -71,6 +74,7 @@ export default async (client, m) => {
   } else {
     prefix = new RegExp('^(' + prefixes.join('|') + ')?', 'i');
   }
+
   const strRegex = (str) => str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
   let pluginPrefix = client.prefix ? client.prefix : prefix;
   let matchs = pluginPrefix instanceof RegExp ? [[pluginPrefix.exec(m.text), pluginPrefix]] : Array.isArray(pluginPrefix) ? pluginPrefix.map(p => {
@@ -89,7 +93,7 @@ export default async (client, m) => {
           continue;
         }
       } catch (err) {
-        console.error(`Error en plugin.all -> ${name}`, err);
+        console.error(`Error en plugin.before -> ${name}`, err);
       }
     }
   }
@@ -104,7 +108,7 @@ export default async (client, m) => {
   const chatData = global.db.data.chats[from] || {};
   const consolePrimary = chatData.primaryBot;
   if (m.message || !consolePrimary || consolePrimary === botJid) {
-    console.log(chalk.bold.magenta(`╭────────────────────────────···\n│ ${chalk.cyan('🌸 Bot')}: ${gradient('pink', 'magenta')(botJid)}\n│ ${chalk.bold.yellow('📅 Fecha')}: ${gradient('orange', 'yellow')(moment().format('DD/MM/YY HH:mm:ss'))}\n│ ${chalk.bold.blue('👤 Usuario')}: ${gradient('cyan', 'blue')(pushname)}\n│ ${chalk.bold.magenta('📱 Remitente')}: ${gradient('deepskyblue', 'darkorchid')(sender)}\n${m.isGroup ? '│' + chalk.bold.green(' 👥 Grupo') + ': ' + gradient('green', 'lime')(groupName) : '│' + chalk.bold.green(' 💬 Privado') + ': ' + gradient('pink', 'magenta')('Chat Privado')}\n${'│' + chalk.bold.magenta(' 🆔 ID') + ': ' + gradient('violet', 'midnightblue')(m.isGroup ? from : 'Chat Privado')}\n│ ${chalk.bold.cyan('⚡ Comando usado')}: ${chalk.gray(command ? command : 'Ninguno')}\n╰────────────────────────────···\n`));
+    console.log(chalk.bold.cyan(`╭────────────────────────────···\n│ ${chalk.cyan('⛩️ Bot')}: ${gradient('cyan', 'blue')(botJid)}\n│ ${chalk.bold.yellow('📅 Fecha')}: ${gradient('orange', 'yellow')(moment().format('DD/MM/YY HH:mm:ss'))}\n│ ${chalk.bold.blue('👤 Usuario')}: ${gradient('cyan', 'blue')(pushname)}\n│ ${chalk.bold.cyan('📱 Remitente')}: ${gradient('deepskyblue', 'darkorchid')(sender)}\n${m.isGroup ? '│' + chalk.bold.green(' 👥 Grupo') + ': ' + gradient('green', 'lime')(groupName) : '│' + chalk.bold.green(' 💬 Privado') + ': ' + gradient('cyan', 'blue')('Chat Privado')}\n${'│' + chalk.bold.cyan(' 🆔 ID') + ': ' + gradient('violet', 'midnightblue')(m.isGroup ? from : 'Chat Privado')}\n│ ${chalk.bold.cyan('⚡ Comando usado')}: ${chalk.gray(command ? command : 'Ninguno')}\n╰────────────────────────────···\n`));
   }
 
   const hasPrefix = settings.prefix === true ? true : (Array.isArray(settings.prefix) ? settings.prefix : typeof settings.prefix === 'string' ? [settings.prefix] : []).some(p => m.text?.startsWith(p));
@@ -131,6 +135,7 @@ export default async (client, m) => {
     } catch {}
     return bots;
   }
+
   const botprimaryId = chat?.primaryBot
   if (botprimaryId && botprimaryId !== botJid) {
     if (hasPrefix) {
@@ -138,31 +143,27 @@ export default async (client, m) => {
       const primaryInGroup = participants.some(p => (p.phoneNumber || p.id) === botprimaryId)
       const isPrimarySelf = botprimaryId === botJid
       const primaryInSessions = getAllSessionBots().includes(botprimaryId)
-      if (!primaryInSessions || !primaryInGroup) {
-        return
-      }
-      if ((primaryInSessions && primaryInGroup) || isPrimarySelf) {
-        return;
-      }
+      if (!primaryInSessions || !primaryInGroup) return
+      if ((primaryInSessions && primaryInGroup) || isPrimarySelf) return
     }
   }
 
-  if (!isOwners && settings.self) return;  
+  if (!isOwners && settings.self) return;
   if (m.chat && !m.chat.endsWith('g.us')) {
     const allowedInPrivateForUsers = ['allmenu', 'help', 'menu', 'infobot', 'botinfo', 'invite', 'invitar', 'ping', 'speed', 'p', 'status', 'estado', 'report', 'reporte', 'sug', 'suggest', 'token', 'join', 'unir', 'logout', 'reload', 'self', 'setbanner', 'setbotbanner', 'setchannel', 'setbotchannel', 'setbotcurrency', 'setcurrency', 'seticon', 'setboticon', 'setlink', 'setbotlink', 'setbotname', 'setname', 'setbotowner', 'setowner', 'setimage', 'setpfp', 'setprefix', 'setbotprefix', 'setstatus', 'setusername', 'code', 'qr']
     if (!global.owner.map(num => num + '@s.whatsapp.net').includes(sender) && !allowedInPrivateForUsers.includes(command)) return;
   }
   if (chat?.isBanned && !(command === 'bot' && text === 'on') && !global.owner.map(num => num + '@s.whatsapp.net').includes(sender)) {
-    await m.reply(`🌸✨ El bot *${settings.botname || 'Natsumi'}* está desactivado en este grupo.\n\n> ⚡ Un *administrador* puede activarlo con:\n> » *${usedPrefix}bot on*`);
+    await m.reply(`⛩️ El bot *${settings.botname || 'Wang Ling'}* está desactivado en este grupo.\n\n> ⚡ Un *administrador* puede activarlo con:\n> » *${usedPrefix}bot on*`);
     return;
   }
   if (m.text && user.banned && !global.owner.map(num => num + '@s.whatsapp.net').includes(sender)) {
-    await m.reply(`🌸✨ ${user.genre === 'Mujer' ? 'Estás baneada' : user.genre === 'Hombre' ? 'Estás baneado' : 'Estás baneado/a'}, no puedes usar comandos.\n\n> ● *Razón:* ${user.bannedReason || 'Sin especificar'}`);
+    await m.reply(`⛩️ ${user.genre === 'Mujer' ? 'Estás baneada' : user.genre === 'Hombre' ? 'Estás baneado' : 'Estás baneado/a'}, no puedes usar comandos.\n\n> ● *Razón:* ${user.bannedReason || 'Sin especificar'}`);
     return;
   }
 
   if (!users.stats) users.stats = {};
-  if (!users.stats[today]) users.stats[today] = { msgs: 0, cmds: 0 }; 
+  if (!users.stats[today]) users.stats[today] = { msgs: 0, cmds: 0 };
   if (chat.adminonly && !isAdmins) return;
   const cmdData = global.comandos.get(command);
   if (!cmdData) {
@@ -187,7 +188,7 @@ export default async (client, m) => {
     users.stats[today].cmds++;
     await cmdData.run(client, m, args, usedPrefix, command, text);
   } catch (error) {
-    await client.sendMessage(m.chat, { text: `❌ Error al ejecutar el comando\n${error}` }, { quoted: m });
+    await client.sendMessage(m.chat, { text: `⛩️ Error al ejecutar el comando\n${error}` }, { quoted: m });
   }
   level(m);
 };
