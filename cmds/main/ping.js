@@ -4,58 +4,53 @@ export default {
   description: 'Mide la velocidad de respuesta del bot.',
   run: async (client, m, args, usedPrefix, command) => {
     const start = Date.now()
-    await m.reply('⚔️ *Midiendo el poder del bot...*')
+    await m.reply('⛩️ *Midiendo el poder de Wang Ling...*')
     const end = Date.now()
     const ping = end - start
     const apiPing = Math.round(client.ws?.ping || 0)
 
-    // Nivel de poder según ping
-    let nivel, emoji, pecado
+    let nivel, emoji, poder
     if (ping <= 100) {
       emoji = '🟢'
-      nivel = 'Clase S — Caballero Sagrado'
-      pecado = '⚔️ *Meliodas — Dragón de la Ira*'
+      nivel = 'Supresión Máxima — Poder Ilimitado'
+      poder = '⚡ *Wang Ling — Cultivador Inmortal*'
     } else if (ping <= 200) {
       emoji = '🟢'
-      nivel = 'Clase A — Caballero de Hierro'
-      pecado = '🐗 *Escanor — León del Orgullo*'
+      nivel = 'Nivel Divino — Gran Cultivador'
+      poder = '🌀 *Etapa Nascent Soul*'
     } else if (ping <= 400) {
       emoji = '🟡'
-      nivel = 'Clase B — Caballero Común'
-      pecado = '🦊 *Ban — Zorro de la Codicia*'
+      nivel = 'Nivel Tierra — Cultivador Medio'
+      poder = '🔥 *Etapa Golden Core*'
     } else if (ping <= 700) {
       emoji = '🟠'
-      nivel = 'Clase C — Aprendiz'
-      pecado = '🐍 *Merlin — Serpiente de la Gula*'
+      nivel = 'Nivel Mortal — Cultivador Común'
+      poder = '💨 *Etapa Foundation Building*'
     } else {
       emoji = '🔴'
-      nivel = 'Clase D — Civil Sin Poder'
-      pecado = '🐑 *Gowther — Cabra de la Lujuria*'
+      nivel = 'Sin Qi — Mortal Sin Poder'
+      poder = '😐 *Etapa Qi Condensation*'
     }
 
     const message = `
-╔══════════════════════╗
-   ✦ *NANATSU BOT - MD* ✦
-   ⚔️ *LOS 7 PECADOS* ⚔️
-╚══════════════════════╝
+╭━━━〔 ⛩️ *WANG LING BOT* ⛩️ 〕━━━📌
+┃
+┃ ${poder}
+┃
+┃ ${emoji} *Velocidad del Bot*
+┃ 📡 Ping: *${ping}ms*
+┃ 🌐 WS: *${apiPing}ms*
+┃
+┃ 🏅 *Nivel de Poder:*
+┃ ${nivel}
+┃
+┃ ❝ El poder verdadero
+┃   no necesita ser mostrado. ❞
+┃         — *Wang Ling*
+┃
+┗━━━━━━━━━━━━━━━━━━━━📌
+`.trim()
 
-${pecado}
-
-${emoji} *Velocidad del Bot*
-┣ 📡 Ping: *${ping}ms*
-┗ 🌐 WS: *${apiPing}ms*
-
-🏅 *Nivel de Poder:*
-┗ ${nivel}
-
-❝ El poder no es todo,
-  pero sin él no eres nada. ❞
-        — *Meliodas*
-
-╔══════════════════════╗
-  🔱 *NanatsuBot-MD v1.0*
-╚══════════════════════╝
-`
     await m.reply(message)
   }
 }
