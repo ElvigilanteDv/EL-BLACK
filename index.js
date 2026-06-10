@@ -41,17 +41,17 @@ function normalizePhoneForPairing(input) {
 }
 
 const { say } = cfonts
-console.log(chalk.cyanBright('\n⛩️❀ Wang Ling Bot Iniciando... ❀⚡'))
-say('Wang Ling', {
-  align: 'center',
-  gradient: ['cyan', 'blue']
+console.log(chalk.magentaBright('\n⚔️❀ NanatsuBot-MD Iniciando... ❀⏳'))
+say('NanatsuBot MD', {
+  align: 'center',           
+  gradient: ['yellow', 'red'] 
 })
-say('Made with love by el.de.ai', {
+say('Made with love by Destroy', {
   font: 'console',
   align: 'center',
-  gradient: ['cyan', 'blue']
+  gradient: ['yellow', 'magenta']
 })
-console.log(chalk.cyanBright('⚡⛩️ Supresión Activada - Wang Ling Bot ⛩️⚡'))
+console.log(chalk.yellowBright('⏳⚔️ Modo Fusión Meliodas Activado - NanatsuBot-MD ⚔️'))
 
 const botTypes = [
   { name: 'SubBot', folder: './Sessions/Subs', starter: startSubBot }
@@ -75,7 +75,7 @@ async function loadBots() {
         reconnecting.add(userId);
         await starter(null, null, 'Auto reconexión', false, userId, sessionPath);
       } catch (e) {
-        console.log(chalk.gray(`[ Wang Ling ] Error iniciando ${name} ${userId}: ${e?.message || e}`));
+        console.log(chalk.gray(`[ Gotenks ] Error iniciando ${name} ${userId}: ${e?.message || e}`));
       } finally {
         reconnecting.delete(userId);
       }
@@ -94,7 +94,7 @@ function cleanCache() {
       for (const file of files) {
         try { fs.unlinkSync(path.join(tmpFolder, file)); cleaned++; } catch {}
       }
-      if (cleaned > 0) console.log(chalk.gray(`[ 🗑️⛩️ ] Cache tmp: ${cleaned} archivos eliminados`));
+      if (cleaned > 0) console.log(chalk.gray(`[ 🗑️⚔️ ] Cache tmp: ${cleaned} archivos eliminados`));
     }
     const sessionsFolder = './Sessions';
     if (fs.existsSync(sessionsFolder)) {
@@ -111,7 +111,7 @@ function cleanCache() {
       };
       const sizeMB = getFolderSizeMB(sessionsFolder);
       if (sizeMB > maxCache) {
-        console.log(chalk.yellow(`[ ⚠⛩️ ] Sessions ${sizeMB.toFixed(1)}MB — limpiando...`));
+        console.log(chalk.yellow(`[ ⚠⚔️ ] Sessions ${sizeMB.toFixed(1)}MB — limpiando...`));
         const safeDelete = (dir) => {
           for (const file of fs.readdirSync(dir)) {
             const filePath = path.join(dir, file);
@@ -130,7 +130,7 @@ function cleanCache() {
       }
     }
   } catch (e) {
-    console.error(chalk.red('Error en cleanCache Wang Ling: '), e);
+    console.error(chalk.red('Error en cleanCache Gotenks: '), e);
   }
 }
 
@@ -140,14 +140,14 @@ if (methodCodeQR) {
 } else if (methodCode) {
   opcion = "2";
 } else if (!fs.existsSync("./Sessions/Owner/creds.json")) {
-  console.log(chalk.cyanBright.bold('\n⛩️⚡ Modo Inmortal Wang Ling Activado ⛩️⚡\n'))
-  opcion = readlineSync.question(chalk.bold.white("Seleccione una opción:\n") + chalk.cyanBright("1. Con código QR\n") + chalk.blueBright("2. Con código de texto de 8 dígitos\n⛩️--> "));
+  console.log(chalk.yellowBright.bold('\n⚔️💎 Modo Escanor NanatsuBot-MD Activado ⚔️💎\n'))
+  opcion = readlineSync.question(chalk.bold.white("Seleccione una opción:\n") + chalk.yellowBright("1. Con código QR\n") + chalk.cyanBright("2. Con código de texto de 8 dígitos\n⚔️--> "));
   while (!/^[1-2]$/.test(opcion)) {
-    console.log(chalk.bold.redBright(`⛩️ No se permiten numeros que no sean 1 o 2, tampoco letras o símbolos especiales.`));
-    opcion = readlineSync.question("⛩️--> ");
+    console.log(chalk.bold.redBright(`⚔️ No se permiten numeros que no sean 1 o 2, tampoco letras o símbolos especiales.`));
+    opcion = readlineSync.question("⚔️--> ");
   }
   if (opcion === "2") {
-    console.log(chalk.bold.cyanBright(`\n⛩️ Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.greenBright("Ejemplo: +57301******")}\n${chalk.bold.cyanBright('⚡---> ')}`));
+    console.log(chalk.bold.yellowBright(`\n⚔️ Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.greenBright("Ejemplo: +51910******")}\n${chalk.bold.yellowBright('⏳---> ')}`));
     phoneInput = readlineSync.question("");
     phoneNumber = normalizePhoneForPairing(phoneInput);
   }
@@ -165,8 +165,8 @@ async function startBot() {
     version,
     logger,
     printQRInTerminal: false,
-    browser: Browsers.ubuntu('Chrome'),
-    auth: { creds: state.creds, keys:      makeCacheableSignalKeyStore(state.keys, logger) },
+    browser: Browsers.macOS('Chrome'),
+    auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, logger) },
     markOnlineOnConnect: false,
     generateHighQualityLinkPreview: true,
     syncFullHistory: false,
@@ -184,7 +184,7 @@ async function startBot() {
         if (!state.creds.registered) {
           const pairing = await global.client.requestPairingCode(phoneNumber);
           const codeBot = pairing?.match(/.{1,4}/g)?.join("-") || pairing;
-          console.log(chalk.bold.cyan(chalk.bgBlue(`⛩️ Código de emparejamiento Wang Ling:`)), chalk.bold.white(chalk.cyanBright(codeBot)));
+          console.log(chalk.bold.yellow(chalk.bgMagenta(`⚔️ Código de emparejamiento Meliodas:`)), chalk.bold.white(chalk.yellow(codeBot)));
         }
       } catch (err) {
         console.log(chalk.red("Error al generar código:"), err);
@@ -197,7 +197,7 @@ async function startBot() {
     const { qr, connection, lastDisconnect, isNewLogin, receivedPendingNotifications } = update;
     if (qr != 0 && qr != undefined || methodCodeQR) {
       if (opcion == '1' || methodCodeQR) {
-        console.log(chalk.cyanBright.bold("[ ⛩️⚡ ] Escanea este código QR - Wang Ling Bot"));
+        console.log(chalk.yellowBright.bold("[ ⚔️⏳ ] Escanea este código QR - NanatsuBot-MD"));
         qrcode.generate(qr, { small: true });
       }
     }
@@ -205,33 +205,33 @@ async function startBot() {
     if (connection === "close") {
       const reason = lastDisconnect?.error?.output?.statusCode || 0;
       if (reason === DisconnectReason.loggedOut) {
-        log.warning("⛩️ Escanee nuevamente y ejecute...");
+        log.warning("⏳ Escanee nuevamente y ejecute...");
         exec("rm -rf ./Sessions/Owner/*");
         process.exit(1);
       } else if (reason === DisconnectReason.forbidden) {
-        log.error("⛩️ Error de conexión, escanee nuevamente y ejecute...");
+        log.error("⚔️ Error de conexión, escanee nuevamente y ejecute...");
         exec("rm -rf ./Sessions/Owner/*");
         process.exit(1);
       } else if (reason === DisconnectReason.multideviceMismatch) {
-        log.warning("⛩️ Inicia nuevamente");
+        log.warning("⚔️ Inicia nuevamente");
         exec("rm -rf ./Sessions/Owner/*");
         process.exit(0);
       } else if (reason === DisconnectReason.connectionReplaced) {
-        log.warning("⛩️ Primero cierre la sesión actual...");
+        log.warning("⏳ Primero cierre la sesión actual...");
         return;
       } else {
         reconexion++;
         if (reconexion > intentos) {
-          log.error(`⛩️ Demasiados reintentos (${intentos}). Reinicia el proceso manualmente.`);
+          log.error(`🥲 Demasiados reintentos (${intentos}). Reinicia el proceso manualmente.`);
           process.exit(1);
         }
         const delay = Math.min(3000 * reconexion, 30000);
-        if (reason === DisconnectReason.connectionLost) log.warning("⚡ Se perdió la conexión al servidor, intento reconectarme..");
-        else if (reason === DisconnectReason.connectionClosed) log.warning("⚡ Conexión cerrada, intentando reconectarse...");
-        else if (reason === DisconnectReason.restartRequired) log.warning("⚡ Es necesario reiniciar..");
-        else if (reason === DisconnectReason.timedOut) log.warning("⚡ Tiempo de conexión agotado, intentando reconectarse...");
-        else if (reason === DisconnectReason.badSession) log.warning("⛩️ Eliminar sesión y escanear nuevamente...");
-        else log.warning(`⛩️ Desconexión (${reason}), reconectando...`);
+        if (reason === DisconnectReason.connectionLost) log.warning("⏳ Se perdió la conexión al servidor, intento reconectarme..");
+        else if (reason === DisconnectReason.connectionClosed) log.warning("⏳ Conexión cerrada, intentando reconectarse...");
+        else if (reason === DisconnectReason.restartRequired) log.warning("⏳ Es necesario reiniciar..");
+        else if (reason === DisconnectReason.timedOut) log.warning("⏳ Tiempo de conexión agotado, intentando reconectarse...");
+        else if (reason === DisconnectReason.badSession) log.warning("⚔️ Eliminar sesión y escanear nuevamente...");
+        else log.warning(`⚔️ Desconexión (${reason}), reconectando...`);
         setTimeout(startBot, delay);
       }
     }
@@ -239,12 +239,12 @@ async function startBot() {
     if (connection === "open") {
       reconexion = 0;
       const userName = sock.user.name || "Desconocido";
-      console.log(chalk.cyanBright.bold(`[ ⛩️⚡ ] Wang Ling Bot Conectado a: ${userName} ⚡⛩️`));
-      console.log(chalk.blueBright('⚡ Supresión Activada - Poder Ilimitado Listo ⚡'));
+      console.log(chalk.yellowBright.bold(`[ ⚔️⏳ ] NanatsuBot-MD Conectado a: ${userName} ⏳⚔️ `));
+      console.log(chalk.greenBright('⚡ Modo Meliodas Activado - Listo para pelear ⚡'));
     }
-    if (isNewLogin) log.info("⛩️ Nuevo dispositivo detectado");
+    if (isNewLogin) log.info("⚔️ Nuevo dispositivo detectado");
     if (receivedPendingNotifications === true) {
-      log.warn("⚡ Por favor espere aproximadamente 1 minuto...");
+      log.warn("⏳ Por favor espere aproximadamente 1 minuto...");
       sock.ev.flush();
     }
   });
@@ -259,13 +259,13 @@ async function startBot() {
       const m = await smsg(sock, kay);
       main(sock, m, chatUpdate);
     } catch (err) {
-      console.log(log.error('Error Wang Ling:'), err);
+      console.log(log.error('Error Gotenks:'), err);
     }
   });
   try {
     await events(sock, null);
   } catch (err) {
-    console.log(chalk.gray(`[ Wang Ling Bot ] → ${err}`));
+    console.log(chalk.gray(`[ NanatsuBot-MD ] → ${err}`));
   }
 
   sock.decodeJid = (jid) => {
@@ -282,23 +282,23 @@ setInterval(cleanCache, 3 * 60 * 60 * 1000);
 cleanCache();
 
 (async () => {
-  await loadBots();
+await loadBots(); 
 })();
 
 (async () => {
-  global.loadDatabase()
-  console.log(chalk.gray('[ ⛩️⚡ ] Base de datos cargada correctamente.'))
-  await startBot();
+global.loadDatabase()
+console.log(chalk.gray('[ ⏳⚔️ ] Base de datos cargada correctamente.'))
+await startBot();
 })();
 
 process.on('uncaughtException', (err) => {
   const msg = err?.message || '';
   if (msg.includes('rate-overlimit') || msg.includes('timed out') || msg.includes('Connection Closed')) return;
-  console.error(chalk.red('[Wang Ling Bot - uncaughtException]'), msg.slice(0, 120));
+  console.error(chalk.red('[Gotenks V1 - uncaughtException]'), msg.slice(0, 120));
 });
 
 process.on('unhandledRejection', (reason) => {
   const msg = String(reason?.message || reason || '');
   if (msg.includes('rate-overlimit') || msg.includes('timed out') || msg.includes('Connection Closed')) return;
-  console.error(chalk.red('[Wang Ling Bot - unhandledRejection]'), msg.slice(0, 120));
+  console.error(chalk.red('[NanatsuBot-MD - unhandledRejection]'), msg.slice(0, 120));
 });
