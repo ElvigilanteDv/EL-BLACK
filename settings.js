@@ -7,7 +7,7 @@ import fs from 'fs';
 
 // 👑 PROPIETARIOS DEL REINO
 global.owner = [
-    '51910227479', // 🐉 Pecado Principal
+    '59177474230', // 🐉 Pecado Principal
     '59177474230'  // elvigilante 
 ]
 
