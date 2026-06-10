@@ -6,20 +6,10 @@ import fetch from 'node-fetch'
 const charset = { a:'ᴀ',b:'ʙ',c:'ᴄ',d:'ᴅ',e:'ᴇ',f:'ꜰ',g:'ɢ',h:'ʜ',i:'ɪ',j:'ᴊ',k:'ᴋ',l:'ʟ',m:'ᴍ',n:'ɴ',o:'ᴏ',p:'ᴘ',q:'ǫ',r:'ʀ',s:'ꜱ',t:'ᴛ',u:'ᴜ',v:'ᴠ',w:'ᴡ',x:'x',y:'ʏ',z:'ᴢ' }
 const textCyberpunk = t => t.replace(/[a-z]/gi, c => charset[c.toLowerCase()] || c)
 
-const defaultMenu = {
-  before: `
-—͟͟͞͞ ⛩️ *WANG LING BOT* »
-> 🪐 𝙉𝙤𝙢𝙗𝙧𝙚 » %name
-> ⚡ 𝙀𝙭𝙥 » %exp / %maxexp
-> 🌐 𝙈𝙤𝙙𝙤 » %mode
-> ⏳ 𝘼𝙘𝙩𝙞𝙫𝙤 » %muptime
-> 👥 𝙐𝙨𝙪𝙖𝙧𝙞𝙤𝙨 » %totalreg
-%readmore
-`.trim(),
-  header: '\n⧼⋆꙳•〔 ⛩️ %category 〕⋆꙳•⧽',
-  body: '> 𖣘 %cmd',
-  footer: '╰⋆꙳•❅‧*₊⋆꙳︎‧*❆₊⋆╯',
-  after: '\n⌬ 𝗪𝗔𝗡𝗚 𝗟𝗜𝗡𝗚 𝗠𝗘𝗡𝗨 ⚡ - Sistema ejecutado con éxito.'
+const CATEGORIAS = {
+  info: { icon: '📋', label: 'ɪɴꜰᴏ' },
+  search: { icon: '🔍', label: 'ꜱᴇᴀʀᴄʜ' },
+  descargas: { icon: '📥', label: 'ᴅᴇꜱᴄᴀʀɢᴀꜱ' }
 }
 
 const fetchBuffer = url => fetch(url).then(r => r.arrayBuffer()).then(b => Buffer.from(b))
@@ -52,37 +42,42 @@ export default {
 
       const plugins = Object.values(global.plugins || {}).filter(p => !p.disabled)
 
-      const help = plugins.map(p => ({
-        help: [].concat(p.help || []),
-        tags: [].concat(p.tags || []),
-        prefix: 'customPrefix' in p,
-        desc: p.desc || ''
-      }))
+      const sections = {}
+      for (const cat of Object.keys(CATEGORIAS)) {
+        sections[cat] = plugins.filter(p =>
+          [].concat(p.tags || []).some(t => t?.toLowerCase() === cat.toLowerCase())
+        )
+      }
 
-      const tags = {}
-      help.forEach(({ tags: tg }) =>
-        tg.forEach(t => t && !tags[t] && (tags[t] = textCyberpunk(t)))
-      )
+      let menuText = `
+—͟͟͞͞ ⛩️ *WANG LING BOT* »
+> 🪐 𝙉𝙤𝙢𝙗𝙧𝙚 » ${replace.name}
+> ⚡ 𝙀𝙭𝙥 » ${replace.exp} / ${replace.maxexp}
+> 🌐 𝙈𝙤𝙙𝙤 » ${replace.mode}
+> ⏳ 𝘼𝙘𝙩𝙞𝙫𝙤 » ${replace.muptime}
+> 👥 𝙐𝙨𝙪𝙖𝙧𝙞𝙤𝙨 » ${replace.totalreg}
+${replace.readmore}`.trim()
 
-      const menu = defaultMenu
+      for (const [cat, { icon, label }] of Object.entries(CATEGORIAS)) {
+        const cmds = sections[cat]
+        if (!cmds || !cmds.length) continue
 
-      const text = [
-        menu.before,
-        ...Object.keys(tags).map(tag => {
-          const cmds = help
-            .filter(p => p.tags.includes(tag))
-            .flatMap(p => p.help.map(c =>
-              menu.body.replace('%cmd', p.prefix ? c : usedPrefix + c) +
-              (p.desc ? `\n> ✦ ${p.desc}` : '')
-            )).join('\n')
-          return cmds ? `${menu.header.replace('%category', tags[tag])}\n${cmds}\n${menu.footer}` : ''
-        }).filter(Boolean),
-        menu.after
-      ].join('\n').replace(/%(\w+)/g, (_, k) => replace[k] ?? '')
+        menuText += `\n\n⧼⋆꙳•〔 ${icon} ${label} 〕⋆꙳•⧽`
+        for (const p of cmds) {
+          const helps = [].concat(p.help || [])
+          if (!helps.length) continue
+          const cmdLine = usedPrefix + helps[0]
+          menuText += `\n> 𖣘 ${cmdLine}`
+          if (p.desc) menuText += `\n> ✦ ${p.desc}`
+        }
+        menuText += `\n╰⋆꙳•❅‧*₊⋆꙳︎‧*❆₊⋆╯`
+      }
+
+      menuText += `\n\n⌬ 𝗪𝗔𝗡𝗚 𝗟𝗜𝗡𝗚 𝗠𝗘𝗡𝗨 ⚡ - Sistema ejecutado con éxito.`
 
       await client.sendMessage(m.chat, {
         image: defaultThumb,
-        caption: text
+        caption: menuText
       }, { quoted: m })
 
     } catch (e) {
